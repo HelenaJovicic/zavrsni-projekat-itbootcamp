@@ -16,14 +16,18 @@ public class HomePage {
     public WebDriver driver;
     public WebDriverWait wdwait;
 
+    //logo
+
+
 
     @FindBy(className = "banner-image")
     public WebElement seleniumBanner;
 
 
-    @FindAll(@FindBy(className = "card-body"))
+    @FindAll(@FindBy(className = "card-body")) //pronalazi sve web elemente koji imaju class="card-body".
+    // ovo je isto sto i driver.findElements(By.className("card-body"));
 
-    public List<WebElement> cards;
+    public List<WebElement> cards; // i sve ih smesta u cards
 
 
     public HomePage(WebDriver driver) {

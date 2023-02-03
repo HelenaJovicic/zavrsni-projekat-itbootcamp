@@ -28,6 +28,8 @@ public class Base {
     public ExcelReader excelReader;
     public SeleniumPage seleniumPage;
     public CheckBoxPage checkBoxPage;
+    public RadioButtonPage radioButtonPage;
+    JavascriptExecutor js;
 
 
 
@@ -43,6 +45,8 @@ public class Base {
         elementsPage = new ElementsPage(driver);
         textBoxPage = new TextBoxPage (driver);
         checkBoxPage = new CheckBoxPage (driver);
+        radioButtonPage = new RadioButtonPage(driver);
+        js = (JavascriptExecutor) driver;
 
 
 
@@ -60,7 +64,11 @@ public class Base {
 
     public void scrollIntoView(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+
     }
+
+    //
+    // ((JavascriptExecutor)driver).executeScript("arguments[0].doubleClick();", element);
 
 
     public void waitForVisibility(WebElement element) {
