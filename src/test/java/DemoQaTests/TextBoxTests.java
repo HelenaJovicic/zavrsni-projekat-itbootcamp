@@ -3,6 +3,7 @@ package DemoQaTests;
 import DemoQaBase.Base;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class TextBoxTests extends Base {
@@ -14,9 +15,16 @@ public class TextBoxTests extends Base {
     }
 
     @Test
+    public void clickOnLogoFromTextBoxPage() {
+        homePage.clickOnElements();
+        logoBarPage.clickOnLogo();
+        assertThatCurrentUrlIs(homeUrl);
+    }
+
+    @Test
     public void clickOnElementsButton() {
         homePage.clickOnElements();
-        elementsPage.clickOnButton("Text Box");
+        sideBarPage.clickOnButton("Text Box");
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/text-box");
     }
 
@@ -57,8 +65,6 @@ public class TextBoxTests extends Base {
     public void userSubmittedWithTwoInsertField() {
         clickOnElementsButton();
         userSubmittedWithOneInsertField();
-//        String validFullName = excelReader.getStringData("TextBox", 1, 0);
-//        textBoxPage.insertFullName(validFullName);
         String validEmail = excelReader.getStringData("TextBox", 1, 1);
         textBoxPage.insertEmail(validEmail);
         textBoxPage.clickOnSubmitButton();
@@ -93,16 +99,29 @@ public class TextBoxTests extends Base {
 
     }
 
-    @Test
-    public void userCanNotSubmittedWithInvalidEmail(){
+    //
+//    /**
+//     * This test use data provider which provides all invalid email addresses.
+//     * Data provider is defined by "invalid-email-provider"
+//     * @param invalidEmail invalid email that is passed from data provider
+//     */
+    @Test(dataProvider = "invalid-email-provider")
+    public void userCanNotSubmittedWithInvalidEmail(String invalidEmail) {
         clickOnElementsButton();
-        String invalidEmail = excelReader.getStringData("TextBoxInvalidEmail", 1, 0);
         textBoxPage.insertEmail(invalidEmail);
         textBoxPage.clickOnSubmitButton();
         Assert.assertFalse(isDisplayed(textBoxPage.outputTextInfo));
     }
 
-
+    @DataProvider(name = "invalid-email-provider")//def provajder i dam mu podatke iz tabele
+    public Object[][] invalidEmailDataProvider() { // koristim ga umesto for petlje, to je pruzalac podataka
+        return new Object[][]{//
+                {excelReader.getStringData("TextBoxInvalidEmail", 1, 0)},
+                {excelReader.getStringData("TextBoxInvalidEmail", 2, 0)},
+                {excelReader.getStringData("TextBoxInvalidEmail", 3, 0)},
+                {excelReader.getStringData("TextBoxInvalidEmail", 4, 0)},
+        };
+    }
 
 
 }

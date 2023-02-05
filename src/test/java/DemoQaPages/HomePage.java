@@ -16,10 +16,6 @@ public class HomePage {
     public WebDriver driver;
     public WebDriverWait wdwait;
 
-    //logo
-
-
-
     @FindBy(className = "banner-image")
     public WebElement seleniumBanner;
 

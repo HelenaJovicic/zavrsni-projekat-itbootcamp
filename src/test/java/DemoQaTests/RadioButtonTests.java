@@ -14,43 +14,44 @@ public class RadioButtonTests extends Base {
     }
 
     @Test
-    public void clickOnRadioButtonCard()  {
+    public void clickOnRadioButtonCard() {
         homePage.clickOnElements();
-        elementsPage.clickOnButton("Radio Button");
+        sideBarPage.clickOnButton("Radio Button");
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/radio-button");
-        //Assert.assertTrue(isDisplayed(radioButtonPage.titleText));
-        //Thread.sleep(4000);
-        //Assert.assertTrue(isDisplayed(radioButtonPage.radioButtonYes));
+        Assert.assertTrue(isDisplayed(radioButtonPage.titleText));
+        Assert.assertEquals(radioButtonPage.titleText.getText(), "Do you like the site?");
 
     }
 
     @Test
-    public void clickOnRadioButtonYes(){
+    public void clickOnRadioButtonYes() {
         clickOnRadioButtonCard();
         radioButtonPage.clickOnRadioButton("Yes");
-
+        Assert.assertTrue(isDisplayed(radioButtonPage.getOutputText()));
+        Assert.assertEquals(radioButtonPage.getOutputText().getText(), "You have selected Yes");
     }
+
     @Test
-    public void clickOnRadioButtonImpressive(){
+    public void clickOnRadioButtonImpressive() {
         clickOnRadioButtonCard();
         radioButtonPage.clickOnRadioButton("Impressive");
-
+        Assert.assertTrue(isDisplayed(radioButtonPage.getOutputText()));
+        Assert.assertEquals(radioButtonPage.getOutputText().getText(), "You have selected Impressive");
     }
 
+    @Test
+    public void clickOnRadioButtonNo() {
+        //given user is on the home page (before each)
+        //when user clicks on the radio button card
+        clickOnRadioButtonCard();
+        //then radio button No is not clickable
+        Assert.assertEquals(radioButtonPage.getRadioButtonWithText("No").getCssValue("cursor"), "not-allowed");
+        //when user clicks on radio button No
+        radioButtonPage.clickOnRadioButton("No");
+        //then output text is not visible
+        Assert.assertFalse(isDisplayed(radioButtonPage.getOutputText()));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 }

@@ -34,43 +34,34 @@ public class HomeTests extends Base {
 
 
     @Test
-    public void clickOnFormsCard(){
+    public void clickOnFormsCard() {
         homePage.clickOnForms();
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/forms");
     }
 
     @Test
-    public void clickOnAlertsFrameWindows(){
+    public void clickOnAlertsFrameWindows() {
         homePage.clickOnAlerts();
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/alertsWindows");
     }
 
     @Test
-    public void clickOnWidgets(){
+    public void clickOnWidgets() {
         homePage.clickOnWidgets();
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/widgets");
     }
 
     @Test
-    public void clickOnInteractions(){
+    public void clickOnInteractions() {
         homePage.clickOnInteractions();
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/interaction");
     }
 
     @Test
-    public void clickOnBookStoreApplication(){
+    public void clickOnBookStoreApplication() {
         scrollIntoView(homePage.getCards().get(5));
         homePage.clickOnBookstore();
         Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/books");
     }
-
-
-
-
-
-
-    //    @AfterMethod
-//    public void tearDown() {
-//        driver.quit();
 
 }
